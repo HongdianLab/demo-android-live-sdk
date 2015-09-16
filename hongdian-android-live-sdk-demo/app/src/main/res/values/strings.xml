@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">hongdian-android-live-sdk-demo</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_audio">audioActivity</string>
+    <string name="title_activity_video">videoActivity</string>
+    <string name="roomID">RoomID</string>>
+    <string name="selfID">当前用户ID</string>>
+    <string name="userID">播放某个ID的音频</string>>
+    <string name="startRecordAudio">开始音频录制</string>>
+    <string name="stopRecordAudio">停止音频录制</string>>
+    <string name="startPlayAudio">开始音频播放</string>>
+    <string name="stopPlayAudio">停止音频播放</string>>
+
+    <string name="startRecordVideo">开始视频录制</string>>
+    <string name="stopRecordVideo">停止视频录制</string>>
+    <string name="startPlayVideo">开始视频播放</string>>
+    <string name="stopPlayVideo">停止视频播放</string>>
+    <string name="changeCamera">切换摄像头</string>>
+    <string name="flash">闪光灯</string>>
+
+</resources>
