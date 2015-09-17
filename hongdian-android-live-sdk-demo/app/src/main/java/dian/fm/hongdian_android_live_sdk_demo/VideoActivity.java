@@ -3,8 +3,10 @@ package dian.fm.hongdian_android_live_sdk_demo;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -18,6 +20,7 @@ public class VideoActivity extends AppCompatActivity {
     private EditText _userIDEditText;
     private GLSurfaceView _localView;
     private GLSurfaceView _netView;
+    DisplayMetrics displayMetrics = new DisplayMetrics();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class VideoActivity extends AppCompatActivity {
 
         _selfIDEditText.setText("" + (int) (Math.random() * 100000));
 
+        this.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
     }
 
     @Override
@@ -56,22 +60,21 @@ public class VideoActivity extends AppCompatActivity {
 
     public void onClickButton(View v){
         RelativeLayout.LayoutParams params;
+
         switch (v.getId()){
             case  R.id.videoRecordStart:
                 if (_localView != null){
                     ((RelativeLayout)findViewById(R.id.localView)).removeView(_localView);
                 }
-
                 _localView = new GLSurfaceView(getApplicationContext());
+
                 params =  new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 390);
                 _localView.setLayoutParams(params);
 
                 ((RelativeLayout)findViewById(R.id.localView)).addView(_localView);
                 ((RelativeLayout)findViewById(R.id.localView)).bringChildToFront(findViewById(R.id.toolLayout));
 
-                GLSurfaceView tempView = new GLSurfaceView(getApplicationContext());
-                _localView.setEGLContextClientVersion(2);
-                HDMediaModule.getInstance().bindPreview(tempView, _localView);
+                HDMediaModule.getInstance().bindPreview((SurfaceView)findViewById(R.id.preview), _localView, (float)(displayMetrics.widthPixels * 1.0)/390.0f);
 
                 HDMediaModule.getInstance().startVideoRecord(_roomIDEditText.getText().toString(), _selfIDEditText.getText().toString());
                 break;
@@ -87,12 +90,13 @@ public class VideoActivity extends AppCompatActivity {
                 }
                 _netView = new GLSurfaceView(this);
                 params =  new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 390);
+                params.topMargin = 20;
                 _netView.setLayoutParams(params);
 
                 ((RelativeLayout)findViewById(R.id.netView)).addView(_netView);
                 ((RelativeLayout)findViewById(R.id.netView)).bringChildToFront(findViewById(R.id.startPlayLayout));
 
-                HDMediaModule.getInstance().bindViewToUserId(_userIDEditText.getText().toString(), _netView);
+                HDMediaModule.getInstance().bindViewToUserId(_userIDEditText.getText().toString(), _netView, (float)(displayMetrics.widthPixels * 1.0)/390.0f);
                 HDMediaModule.getInstance().startVideoPlay(_roomIDEditText.getText().toString(), _userIDEditText.getText().toString(), _selfIDEditText.getText().toString());
                 break;
             case R.id.videoPlayStop:
@@ -102,6 +106,7 @@ public class VideoActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.changeCamera:
+                HDMediaModule.getInstance().changeCameraPosition();
                 break;
             case R.id.flash:
                 break;

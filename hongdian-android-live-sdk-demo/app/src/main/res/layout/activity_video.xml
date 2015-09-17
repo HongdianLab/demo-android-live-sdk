@@ -104,6 +104,11 @@
             android:id="@+id/localView"
             >
 
+            <SurfaceView
+                android:id="@+id/preview"
+                android:layout_width="0px"
+                android:layout_height="0px" />
+
             <LinearLayout
                 android:id="@+id/toolLayout"
                 android:layout_width="fill_parent"
