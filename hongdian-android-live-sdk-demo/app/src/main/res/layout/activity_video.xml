@@ -106,8 +106,8 @@
 
             <SurfaceView
                 android:id="@+id/preview"
-                android:layout_width="0px"
-                android:layout_height="0px" />
+                android:layout_width="0.0000001dp"
+                android:layout_height="0.0000001dp" />
 
             <LinearLayout
                 android:id="@+id/toolLayout"
