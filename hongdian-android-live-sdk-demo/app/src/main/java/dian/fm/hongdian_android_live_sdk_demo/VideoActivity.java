@@ -109,6 +109,7 @@ public class VideoActivity extends AppCompatActivity {
                 HDMediaModule.getInstance().changeCameraPosition();
                 break;
             case R.id.flash:
+                HDMediaModule.getInstance().changeTorchStatus();
                 break;
             default:
 
