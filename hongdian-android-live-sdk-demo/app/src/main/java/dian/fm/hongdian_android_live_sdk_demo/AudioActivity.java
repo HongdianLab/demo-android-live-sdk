@@ -61,6 +61,7 @@ public class AudioActivity extends AppCompatActivity {
                 HDMediaModule.getInstance().startAudioPlay(_roomIDEditText.getText().toString(), _userIDEditText.getText().toString(), _selfIDEditText.getText().toString());
                 break;
             case R.id.audioPlayStop:
+//                HDMediaModule.getInstance().stopAudioPlay(_roomIDEditText.getText().toString(), _userIDEditText.getText().toString(), _selfIDEditText.getText().toString());
                 HDMediaModule.getInstance().stopAudioPlay();
                 break;
             default:
