@@ -12,7 +12,8 @@
   * libopustool.so
   * libx264.a
 
- 如果编译时候开启了minifyEnabled，则需要在proguard-rules.pro中设置：-keep class hd.hdmedia.** {*;}
+如果编译时候开启了minifyEnabled，则需要在proguard-rules.pro中设置：
+ -keep class hd.hdmedia.** {*;}
 
 [下载地址](https://github.com/HongdianLab/android-live-sdk)
 
