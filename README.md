@@ -14,6 +14,10 @@
 
 如果编译时候开启了minifyEnabled，则需要在proguard-rules.pro中设置：
  -keep class hd.hdmedia.** {*;}
+ 
+ 开启视频录制后，请不要切换activity或者切入后台，会导致视频录制卡住，如果需要请关闭录制再重新开启
+ 
+ 程序异常退出时，需要停止视频录制以释放资源（某些手机会自动释放，某些手机并不会）
 
 [下载地址](https://github.com/HongdianLab/android-live-sdk)
 
