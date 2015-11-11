@@ -81,9 +81,10 @@ public class VideoActivity extends AppCompatActivity {
                 ((RelativeLayout)findViewById(R.id.localView)).addView(_localView);
                 ((RelativeLayout)findViewById(R.id.localView)).bringChildToFront(findViewById(R.id.toolLayout));
 
+                HDMediaModule.getInstance().startVideoRecord(_roomIDEditText.getText().toString(), _selfIDEditText.getText().toString());
                 HDMediaModule.getInstance().bindPreview((SurfaceView)findViewById(R.id.preview), _localView, (float)(displayMetrics.widthPixels * 1.0)/390.0f);
 
-                HDMediaModule.getInstance().startVideoRecord(_roomIDEditText.getText().toString(), _selfIDEditText.getText().toString());
+//                HDMediaModule.getInstance().startVideoRecord(_roomIDEditText.getText().toString(), _selfIDEditText.getText().toString());
                 break;
             case  R.id.videoRecordStop:
                 HDMediaModule.getInstance().stopVideoRecord();
