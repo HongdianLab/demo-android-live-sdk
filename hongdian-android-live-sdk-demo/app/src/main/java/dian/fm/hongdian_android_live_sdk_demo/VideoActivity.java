@@ -34,7 +34,6 @@ public class VideoActivity extends AppCompatActivity {
         _selfIDEditText.setText("" + (int) (Math.random() * 100000));
 
         this.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
         HDMediaModule.getInstance().setRoomStatusListener(new HDMediaModule.HDRoomStatusListener() {
             @Override
             public void roomStatusChanged(String s, String s1, boolean b, boolean b1, HDMediaModule.HDEvent hdEvent) {
