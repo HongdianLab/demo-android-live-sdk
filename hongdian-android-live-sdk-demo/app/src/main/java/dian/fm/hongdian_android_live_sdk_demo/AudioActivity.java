@@ -2,6 +2,7 @@ package dian.fm.hongdian_android_live_sdk_demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,22 +51,26 @@ public class AudioActivity extends AppCompatActivity {
     }
 
     public void onClickButton(View v){
-        switch (v.getId()){
-            case  R.id.audioRecordStart:
-                HDMediaModule.getInstance().startAudioRecord(_roomIDEditText.getText().toString(), _selfIDEditText.getText().toString());
-                break;
-            case  R.id.audioRecordStop:
-                HDMediaModule.getInstance().stopAudioRecord();
-                break;
-            case R.id.audioPlayStart:
-                HDMediaModule.getInstance().startAudioPlay(_roomIDEditText.getText().toString(), _userIDEditText.getText().toString(), _selfIDEditText.getText().toString());
-                break;
-            case R.id.audioPlayStop:
+        try {
+            switch (v.getId()) {
+                case R.id.audioRecordStart:
+                    HDMediaModule.getInstance().startAudioRecord(_roomIDEditText.getText().toString(), _selfIDEditText.getText().toString());
+                    break;
+                case R.id.audioRecordStop:
+                    HDMediaModule.getInstance().stopAudioRecord();
+                    break;
+                case R.id.audioPlayStart:
+                    HDMediaModule.getInstance().startAudioPlay(_roomIDEditText.getText().toString(), _userIDEditText.getText().toString(), _selfIDEditText.getText().toString());
+                    break;
+                case R.id.audioPlayStop:
 //                HDMediaModule.getInstance().stopAudioPlay(_roomIDEditText.getText().toString(), _userIDEditText.getText().toString(), _selfIDEditText.getText().toString());
-                HDMediaModule.getInstance().stopAudioPlay();
-                break;
-            default:
+                    HDMediaModule.getInstance().stopAudioPlay();
+                    break;
+                default:
 
+            }
+        } catch (Exception e) {
+            Log.e("hd-onClickAudio", e.getMessage());
         }
     }
 

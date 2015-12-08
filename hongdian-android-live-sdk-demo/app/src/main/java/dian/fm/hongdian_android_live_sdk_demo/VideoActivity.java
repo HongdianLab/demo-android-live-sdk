@@ -4,6 +4,7 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceView;
@@ -66,62 +67,65 @@ public class VideoActivity extends AppCompatActivity {
 
     public void onClickButton(View v){
         RelativeLayout.LayoutParams params;
+        try {
+            switch (v.getId()) {
+                case R.id.videoRecordStart:
+                    if (_localView != null) {
+                        ((RelativeLayout) findViewById(R.id.localView)).removeView(_localView);
+                    }
+                    _localView = new GLSurfaceView(getApplicationContext());
 
-        switch (v.getId()){
-            case  R.id.videoRecordStart:
-                if (_localView != null){
-                    ((RelativeLayout)findViewById(R.id.localView)).removeView(_localView);
-                }
-                _localView = new GLSurfaceView(getApplicationContext());
+                    params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 390);
+                    _localView.setLayoutParams(params);
 
-                params =  new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 390);
-                _localView.setLayoutParams(params);
+                    ((RelativeLayout) findViewById(R.id.localView)).addView(_localView);
+                    ((RelativeLayout) findViewById(R.id.localView)).bringChildToFront(findViewById(R.id.toolLayout));
 
-                ((RelativeLayout)findViewById(R.id.localView)).addView(_localView);
-                ((RelativeLayout)findViewById(R.id.localView)).bringChildToFront(findViewById(R.id.toolLayout));
-
-                HDMediaModule.getInstance().startVideoRecord(_roomIDEditText.getText().toString(), _selfIDEditText.getText().toString());
-                HDMediaModule.getInstance().bindPreview((SurfaceView)findViewById(R.id.preview), _localView, (float)(displayMetrics.widthPixels * 1.0)/390.0f);
+                    HDMediaModule.getInstance().startVideoRecord(_roomIDEditText.getText().toString(), _selfIDEditText.getText().toString());
+                    HDMediaModule.getInstance().bindPreview((SurfaceView) findViewById(R.id.preview), _localView, (float) (displayMetrics.widthPixels * 1.0) / 390.0f);
 
 //                HDMediaModule.getInstance().startVideoRecord(_roomIDEditText.getText().toString(), _selfIDEditText.getText().toString());
-                break;
-            case  R.id.videoRecordStop:
-                HDMediaModule.getInstance().stopVideoRecord();
-                if (_localView != null){
-                    ((RelativeLayout)findViewById(R.id.localView)).removeView(_localView);
-                }
-                break;
-            case R.id.videoPlayStart:
-                if (_netView != null){
-                    ((RelativeLayout)findViewById(R.id.netView)).removeView(_netView);
-                }
-                _netView = new GLSurfaceView(this);
-                params =  new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 390);
-                params.topMargin = 20;
-                _netView.setLayoutParams(params);
+                    break;
+                case R.id.videoRecordStop:
+                    HDMediaModule.getInstance().stopVideoRecord();
+                    if (_localView != null) {
+                        ((RelativeLayout) findViewById(R.id.localView)).removeView(_localView);
+                    }
+                    break;
+                case R.id.videoPlayStart:
+                    if (_netView != null) {
+                        ((RelativeLayout) findViewById(R.id.netView)).removeView(_netView);
+                    }
+                    _netView = new GLSurfaceView(this);
+                    params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 390);
+                    params.topMargin = 20;
+                    _netView.setLayoutParams(params);
 
-                ((RelativeLayout)findViewById(R.id.netView)).addView(_netView);
-                ((RelativeLayout)findViewById(R.id.netView)).bringChildToFront(findViewById(R.id.startPlayLayout));
+                    ((RelativeLayout) findViewById(R.id.netView)).addView(_netView);
+                    ((RelativeLayout) findViewById(R.id.netView)).bringChildToFront(findViewById(R.id.startPlayLayout));
 
-                HDMediaModule.getInstance().bindViewToUserId(_userIDEditText.getText().toString(), _netView, (float) (displayMetrics.widthPixels * 1.0) / 390.0f);
-                HDMediaModule.getInstance().startVideoPlay(_roomIDEditText.getText().toString(), _userIDEditText.getText().toString(), _selfIDEditText.getText().toString());
+                    HDMediaModule.getInstance().bindViewToUserId(_roomIDEditText.getText().toString(), _userIDEditText.getText().toString(), _netView, (float) (displayMetrics.widthPixels * 1.0) / 390.0f);
+                    HDMediaModule.getInstance().startVideoPlay(_roomIDEditText.getText().toString(), _userIDEditText.getText().toString(), _selfIDEditText.getText().toString());
 //                HDMediaModule.getInstance().startAudioPlay(_roomIDEditText.getText().toString(), list ,_selfIDEditText.getText().toString());
-                break;
-            case R.id.videoPlayStop:
+                    break;
+                case R.id.videoPlayStop:
 //                HDMediaModule.getInstance().stopVideoPlay(_roomIDEditText.getText().toString(), _userIDEditText.getText().toString());
-                HDMediaModule.getInstance().stopVideoPlay();
-                if (_netView != null){
-                    ((RelativeLayout)findViewById(R.id.netView)).removeView(_netView);
-                }
-                break;
-            case R.id.changeCamera:
-                HDMediaModule.getInstance().changeCameraPosition();
-                break;
-            case R.id.flash:
-                HDMediaModule.getInstance().changeTorchStatus();
-                break;
-            default:
+                    HDMediaModule.getInstance().stopVideoPlay();
+                    if (_netView != null) {
+                        ((RelativeLayout) findViewById(R.id.netView)).removeView(_netView);
+                    }
+                    break;
+                case R.id.changeCamera:
+                    HDMediaModule.getInstance().changeCameraPosition();
+                    break;
+                case R.id.flash:
+                    HDMediaModule.getInstance().changeTorchStatus();
+                    break;
+                default:
 
+            }
+        } catch (Exception e) {
+            Log.e("hd-onClickVideo", e.getMessage());
         }
     }
 }
