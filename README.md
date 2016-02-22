@@ -6,11 +6,9 @@
  在使用之前，请首先确保你也添加了如下依赖库：
  
   * hdmedia.jar
-  * libgnustl_shared.so
   * libhdcodec.so
   * libopenh264.so
   * libopustool.so
-  * libx264.a
 
 如果编译时候开启了minifyEnabled，则需要在proguard-rules.pro中设置：
  -keep class hd.hdmedia.** {*;}
