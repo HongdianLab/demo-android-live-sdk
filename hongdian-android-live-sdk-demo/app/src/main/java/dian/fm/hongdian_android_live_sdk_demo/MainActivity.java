@@ -17,7 +17,7 @@ public class MainActivity extends ListActivity {
     private static final String[] items = new String[]{"音频", "视频"};
 
     static {
-        System.loadLibrary("gnustl_shared");
+//        System.loadLibrary("gnustl_shared");
         System.loadLibrary("openh264");
         System.loadLibrary("opustool");
         System.loadLibrary("hdcodec");

@@ -104,8 +104,9 @@ public class VideoActivity extends AppCompatActivity {
                     ((RelativeLayout) findViewById(R.id.netView)).addView(_netView);
                     ((RelativeLayout) findViewById(R.id.netView)).bringChildToFront(findViewById(R.id.startPlayLayout));
 
-                    HDMediaModule.getInstance().bindViewToUserId(_roomIDEditText.getText().toString(), _userIDEditText.getText().toString(), _netView, (float) (displayMetrics.widthPixels * 1.0) / 390.0f);
+
                     HDMediaModule.getInstance().startVideoPlay(_roomIDEditText.getText().toString(), _userIDEditText.getText().toString(), _selfIDEditText.getText().toString());
+                    HDMediaModule.getInstance().bindViewToUserId(_roomIDEditText.getText().toString(), _userIDEditText.getText().toString(), _netView, (float) (displayMetrics.widthPixels * 1.0) / 390.0f);
 //                HDMediaModule.getInstance().startAudioPlay(_roomIDEditText.getText().toString(), list ,_selfIDEditText.getText().toString());
                     break;
                 case R.id.videoPlayStop:
